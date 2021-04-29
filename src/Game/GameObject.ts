@@ -46,7 +46,7 @@ export default abstract class GameObject {
         }
 
         // console.log(`Collision detection took ${Date.now() - start} ms.`)
-
+        
         return true;
     }
 
@@ -67,21 +67,7 @@ export default abstract class GameObject {
     }
 
     /** Executed each tick. Use this to define behavior. */
-    public OnTick(deltaTime: number, heldKeys: Array<string>) {
-        if(this.level.wrapsOutOfBounds) {
-            if (this.X > this.level.width + this.Width)
-                this.X = 0;
-
-            if (this.X + this.Width < 0)
-                this.X = this.level.width;
-
-            if (this.Y > this.level.height + this.Height)
-                this.Y = 0;
-
-            if (this.Y + this.Height < 0)
-                this.Y = this.level.height;
-        }
-     }
+    public OnTick(deltaTime: number, heldKeys: Array<string>) { }
 
     /** Executed each draw cycle. Use this to draw visuals. */
     public OnDraw(deltaTime: number, heldKeys: Array<string>) { }

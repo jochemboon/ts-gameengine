@@ -7,9 +7,6 @@ export default class Level {
     private context: CanvasRenderingContext2D;
     public lastTick: number = 0;
     public lastDraw: number = 0;
-    public wrapsOutOfBounds: boolean = true;
-    public width: number = 800;
-    public height: number = 600;
 
     constructor(name: string, gameObjects: Array<GameObject>, canvas: HTMLCanvasElement) {
         this.Name = name;
