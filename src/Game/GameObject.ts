@@ -44,8 +44,6 @@ export default abstract class GameObject {
 
             i++;
         }
-
-        // console.log(`Collision detection took ${Date.now() - start} ms.`)
         
         return true;
     }
