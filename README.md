@@ -2,7 +2,7 @@
 A game engine for the web made in Typescript.
 
 ## How to build
-Download all node packages, then run npx webpack.
+Install nodejs, then run 'npx webpack' in the project folder. This will transpile and bundle the Typescript files to a single bundle.js file and put it in the dist folder.
 
 ## Current goals
 Here's a shortlist of things that I would like to implement in this game engine. 
