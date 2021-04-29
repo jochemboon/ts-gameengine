@@ -1,0 +1,42 @@
+@startuml
+
+class GameObject {
+    +int X
+    +int Y
+    +int Z
+    +int Width
+    +int Height
+    -Level level
+
+    +boolean CheckFree()
+    +boolean CheckCollisionWith()
+    +void Tick()
+    +void Draw()
+    +void Destroy()
+}
+
+class Level {
+    +string Name
+    +Array<GameObject> GameObjects
+    +void AddGameObject(GameObject gameObject)
+    +void RemoveGameObject(GameObject gameObject)
+}
+
+class Game {
+    -lastIteration
+    -targetTickRate
+    -targetFrameTime
+    -deltaTimes
+
+    +Start()
+    +SetLevel(Level level)
+    -iterate()
+    +onKeyDown()
+    +onKeyUp()
+    +onClick()
+}
+
+class LevelLoader {
+
+}
+@enduml
