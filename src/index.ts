@@ -7,9 +7,9 @@ let canvas = document.getElementById("gamescreen") as HTMLCanvasElement;
 const game = new Game();
 
 // Register keyboard events
-document.addEventListener('keydown', (e) => game.onKeyDown(e), false);
-document.addEventListener('keyup',  (e) => game.onKeyUp(e), false);
-canvas.addEventListener('click',  (e) => game.onClick(e), false);
+document.addEventListener('keydown', (e) => game.OnKeyDown(e), false);
+document.addEventListener('keyup',  (e) => game.OnKeyUp(e), false);
+canvas.addEventListener('click',  (e) => game.OnClick(e), false);
 
 // Load level 
 let levelLoader = new LevelLoader();

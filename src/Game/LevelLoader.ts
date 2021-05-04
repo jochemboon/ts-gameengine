@@ -15,7 +15,7 @@ export default class LevelLoader {
         let objects = new Array<GameObject>();
 
         for (const gameObjectJson of json.gameObjects) {
-            let gameObject = this.CreateGameObject(gameObjectJson.type, gameObjectJson.x, gameObjectJson.y);
+            let gameObject = this.createGameObject(gameObjectJson.type, gameObjectJson.x, gameObjectJson.y);
             console.log("Creating " + gameObjectJson.type)
             objects.push(gameObject);
         }
@@ -32,7 +32,7 @@ export default class LevelLoader {
      * @param y 
      * @returns 
      */
-    private CreateGameObject(type: String, x: number, y: number): GameObject {
+    private createGameObject(type: String, x: number, y: number): GameObject {
         switch(type) {
             case "Wall":{
                 return new Wall(x, y);

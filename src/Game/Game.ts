@@ -2,79 +2,79 @@ import GameObject from "./GameObject";
 import Level from "./Level";
 
 export default class Game {
-    private heldKeys: Array<string> = new Array<string>();
-    private deltaTimes: Array<number> = new Array<number>();
-    private lastTimeStamp: number = 0;
-    private level: Level;
+    private _heldKeys: Array<string> = new Array<string>();
+    private _deltaTimes: Array<number> = new Array<number>();
+    private _lastTimeStamp: number = 0;
+    private _level: Level;
 
     public Start(): void {
-        this.lastTimeStamp = 0;
-        window.requestAnimationFrame((ts) => this.Iterate(ts));        
+        this._lastTimeStamp = 0;
+        window.requestAnimationFrame((ts) => this.iterate(ts));
     }
 
     public SetLevel(level: Level): void {
-        this.level = level;
+        this._level = level;
     }
 
-    private Iterate(timeStamp: number): void {
+    private iterate(timeStamp: number): void {
         // Calculate delta time
-        let deltaTime = (timeStamp - this.lastTimeStamp) / 1000;        
-        this.lastTimeStamp = timeStamp;
-        this.deltaTimes.push(deltaTime);
+        let deltaTime = (timeStamp - this._lastTimeStamp) / 1000;
+        this._lastTimeStamp = timeStamp;
+        this._deltaTimes.push(deltaTime);
 
         // Execute game logic
         let i: number = 0;
-        while(i < this.level.GameObjects.length) {
-            this.level.GameObjects[i].OnTick(deltaTime, this.heldKeys);
+        while(i < this._level.GameObjects.length) {
+            this._level.GameObjects[i].OnTick(deltaTime, this._heldKeys);
             i++;
         }
 
-        this.level.ClearCanvas();
+        this._level.ClearCanvas();
 
         i = 0;
-        while(i < this.level.GameObjects.length) {
-            this.level.GameObjects[i].OnDraw(deltaTime, this.heldKeys);
+        while(i < this._level.GameObjects.length) {
+            this._level.GameObjects[i].OnDraw(deltaTime, this._heldKeys);
             i++;
         }
 
         // Request next frame
-        window.requestAnimationFrame((ts) => this.Iterate(ts));
+        window.requestAnimationFrame((ts) => this.iterate(ts));
     }
 
     // User input handlers
-    public onKeyDown(e: KeyboardEvent): void {
-        if (!this.heldKeys.includes(e.key)) {
-            this.heldKeys.push(e.key);
+    public OnKeyDown(e: KeyboardEvent): void {
+        if (!this._heldKeys.includes(e.key)) {
+            this._heldKeys.push(e.key);
         }
 
         let i: number = 0;
-        while(i < this.level.GameObjects.length) {
-            this.level.GameObjects[i].onKeyDown(e);
+        while(i < this._level.GameObjects.length) {
+            this._level.GameObjects[i].OnKeyDown(e);
             i++;
         }
     }
     
-    public onKeyUp(e: KeyboardEvent): void {
-        if (this.heldKeys.includes(e.key)) {
-            let index = this.heldKeys.indexOf(e.key);
-            this.heldKeys.splice(index, 1);
+    public OnKeyUp(e: KeyboardEvent): void {
+        if (this._heldKeys.includes(e.key)) {
+            let index = this._heldKeys.indexOf(e.key);
+            this._heldKeys.splice(index, 1);
         }
 
         let i: number = 0;
-        while(i < this.level.GameObjects.length) {
-            this.level.GameObjects[i].onKeyUp(e);
+        while(i < this._level.GameObjects.length) {
+            this._level.GameObjects[i].OnKeyUp(e);
             i++
         }
     }
 
-    public onClick(e: MouseEvent): void {
+    public OnClick(e: MouseEvent): void {
         let x = e.offsetX;
         let y = e.offsetY;    
         console.log(`Mouse click at { ${x}, ${y}}`);
 
         let i: number = 0;
-        while(i < this.level.GameObjects.length) {
-            this.level.GameObjects[i].onClick(e);
+        while(i < this._level.GameObjects.length) {
+            this._level.GameObjects[i].OnClick(e);
             i++;
         }
     }

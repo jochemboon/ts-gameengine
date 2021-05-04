@@ -70,9 +70,9 @@ export default abstract class GameObject {
     /** Executed each draw cycle. Use this to draw visuals. */
     public OnDraw(deltaTime: number, heldKeys: Array<string>) { }
 
-    public onKeyDown(e: KeyboardEvent) {}
+    public OnKeyDown(e: KeyboardEvent) {}
 
-    public onKeyUp(e: KeyboardEvent) {}
+    public OnKeyUp(e: KeyboardEvent) {}
 
-    public onClick(e: MouseEvent) {}
+    public OnClick(e: MouseEvent) {}
 }
