@@ -1,4 +1,6 @@
 import GameObject from "../GameObject";
+import ViewPort from "../ViewPort";
+import {RectType} from "./RectType";
 
 export default class Mob extends GameObject {
     private _maxSpeed: number = 50;
@@ -12,9 +14,8 @@ export default class Mob extends GameObject {
         setTimeout(() => this.setRandomSpeed, 5000);
     }
 
-    public OnDraw(deltaTime: number, heldKeys: Array<string>): void {
-        this.context.fillStyle = "red";
-        this.context.fillRect(this.X, this.Y, this.Width, this.Height);
+    public OnDraw(deltaTime: number, heldKeys: Array<string>, viewPort: ViewPort): void {
+        viewPort.DrawSquare(this.X, this.Y, this.Width, this.Height, "red", RectType.Fill)
     }
 
     public OnTick(deltaTime: number, heldKeys: Array<string>): void {

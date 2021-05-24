@@ -1,11 +1,13 @@
 import GameObject from "./GameObject";
 import Level from "./Level";
+import ViewPort from "./ViewPort";
 
 export default class Game {
     private _heldKeys: Array<string> = new Array<string>();
     private _deltaTimes: Array<number> = new Array<number>();
     private _lastTimeStamp: number = 0;
     private _level: Level;
+    private _viewPort: ViewPort;
 
     public Start(): void {
         this._lastTimeStamp = 0;
@@ -14,6 +16,10 @@ export default class Game {
 
     public SetLevel(level: Level): void {
         this._level = level;
+    }
+
+    public SetViewPort(viewPort: ViewPort): void {
+        this._viewPort = viewPort;
     }
 
     private iterate(timeStamp: number): void {
@@ -29,11 +35,11 @@ export default class Game {
             i++;
         }
 
-        this._level.ClearCanvas();
+        this._viewPort.Clear();
 
         i = 0;
         while(i < this._level.GameObjects.length) {
-            this._level.GameObjects[i].OnDraw(deltaTime, this._heldKeys);
+            this._level.GameObjects[i].OnDraw(deltaTime, this._heldKeys, this._viewPort);
             i++;
         }
 

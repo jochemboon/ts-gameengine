@@ -1,7 +1,7 @@
 import Game from './Game/Game';
-import Level from './Game/Level'
 import LevelLoader from './Game/LevelLoader';
 import * as LevelData from './testlevel.json';
+import ViewPort from "./Game/ViewPort";
 
 let canvas = document.getElementById("gamescreen") as HTMLCanvasElement;
 const game = new Game();
@@ -16,5 +16,8 @@ let levelLoader = new LevelLoader();
 let level = levelLoader.Load(LevelData, canvas);
 game.SetLevel(level);
 
-// Start game
+let viewPort = new ViewPort(0, 0, canvas.width, canvas.height, canvas);
+game.SetViewPort(viewPort);
+
+// Start gamesd
 game.Start();

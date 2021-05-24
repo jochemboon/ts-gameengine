@@ -1,4 +1,6 @@
 import GameObject from '../GameObject';
+import ViewPort from "../ViewPort";
+import {RectType} from "./RectType";
 
 export default class Player extends GameObject {
     private _speed = 200;
@@ -7,9 +9,11 @@ export default class Player extends GameObject {
         super(x, y, 0, 32, 32);
     }
 
-    public OnDraw(deltaTime: number, heldKeys: Array<string>): void {
-        this.context.fillStyle = "blue";
-        this.context.fillRect(this.X, this.Y, this.Width, this.Height);
+    public OnDraw(deltaTime: number, heldKeys: Array<string>, viewPort: ViewPort): void {
+        viewPort.SetPosition(this.X - viewPort.Width / 2, this.Y - viewPort.Height / 2);
+        viewPort.DrawSquare(this.X, this.Y, this.Width, this.Height, "blue", RectType.Fill)
+        viewPort.DrawSquare(0, 0, 800, 600, "black", RectType.Stroke);
+        viewPort.DrawTextAbsolute(32, 32, `p x: ${this.X}, p y: ${this.Y}`, "black");
     }
 
     public OnTick(deltaTime: number, heldKeys: Array<string>) {
@@ -24,10 +28,5 @@ export default class Player extends GameObject {
 
         if(heldKeys.includes("s") && this.IsFree(this.X, this.Y + this._speed * deltaTime))
             this.Y += this._speed * deltaTime;
-
-        if(heldKeys.length == 0) {
-            this.X = Math.round(this.X);
-            this.Y = Math.round(this.Y);
-        }
     }
 }

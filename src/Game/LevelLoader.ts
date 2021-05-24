@@ -22,7 +22,7 @@ export default class LevelLoader {
 
         console.log(json.name + " loaded!")
 
-        return new Level("Name", objects, canvas);
+        return new Level("Name", objects);
     }
 
     /**

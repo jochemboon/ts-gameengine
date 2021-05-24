@@ -1,4 +1,5 @@
 import Level from './Level';
+import ViewPort from "./ViewPort";
 
 export default abstract class GameObject {
     public X: number;
@@ -6,6 +7,7 @@ export default abstract class GameObject {
     public Z: number;
     public Width: number;
     public Height: number;
+
 
     // TODO: Find a better way to pass these references. Currently they can modified after the creation of the instance, this should not be possible.
     protected level: Level = undefined;
@@ -24,8 +26,6 @@ export default abstract class GameObject {
      */
     public SetLevel(level: Level) {
         this.level = level;
-        let canvas = level.GetCanvas() as HTMLCanvasElement;
-        this.context = canvas.getContext("2d") as CanvasRenderingContext2D;
     }
 
     /** Checks for a collision between this and any other GameObject at a given position.
@@ -68,7 +68,7 @@ export default abstract class GameObject {
     public OnTick(deltaTime: number, heldKeys: Array<string>) { }
 
     /** Executed each draw cycle. Use this to draw visuals. */
-    public OnDraw(deltaTime: number, heldKeys: Array<string>) { }
+    public OnDraw(deltaTime: number, heldKeys: Array<string>, viewPort: ViewPort) { }
 
     public OnKeyDown(e: KeyboardEvent) {}
 
