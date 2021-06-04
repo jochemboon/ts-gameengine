@@ -1,4 +1,4 @@
-import {RectType} from "./GameObjects/RectType";
+import {RectType} from "./RectType";
 
 export default class ViewPort {
     public Width: number;
@@ -25,13 +25,10 @@ export default class ViewPort {
     }
 
     public DrawSquare(x: number, y: number, width: number, height: number, colorCode: string, type: RectType) {
-        let drawX: number = x - this.X;
-        let drawY: number = y - this.Y;
+        let drawX: number = Math.floor(x - this.X);
+        let drawY: number = Math.floor(y - this.Y);
 
-        if (x >= this.X + this.Width || x + width < this.X )
-            return false;
-
-        if (y >= this.Y + this.Height || y + height < this.Y )
+        if (!this.IsInView(x, y, width, height))
             return;
 
         // TODO: maybe perform this with a delegate instead
@@ -56,14 +53,32 @@ export default class ViewPort {
         }
     }
 
-    public DrawTextAbsolute(x: number, y: number, text: string, colorCode: string) {
+    public DrawCircle() {
+
+    }
+
+    public DrawLine() {
+
+    }
+
+    public DrawTextAbsolute(x: number, y: number, text: string, colorCode: string): void {
         this._context.fillStyle = colorCode;
         this._context.fillText(text, x, y);
     }
 
-    public SetPosition(x: number, y: number) {
-        this.X = x;
-        this.Y = y;
+    public SetPosition(x: number, y: number): void {
+        this.X = Math.floor(x);
+        this.Y = Math.floor(y);
+    }
+
+    public IsInView(x: number, y: number, width: number, height: number): boolean {
+        if (x >= this.X + this.Width || x + width < this.X )
+            return false;
+
+        if (y >= this.Y + this.Height || y + height < this.Y )
+            return;
+
+        return true;
     }
 
     // Circle

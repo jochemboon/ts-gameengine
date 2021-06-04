@@ -1,5 +1,6 @@
 import Level from './Level';
 import ViewPort from "./ViewPort";
+import Game from "./Game";
 
 export default abstract class GameObject {
     public X: number;
@@ -8,8 +9,8 @@ export default abstract class GameObject {
     public Width: number;
     public Height: number;
 
-
     // TODO: Find a better way to pass these references. Currently they can modified after the creation of the instance, this should not be possible.
+    protected Type: string;
     protected level: Level = undefined;
     protected context: CanvasRenderingContext2D = undefined;
 
@@ -62,6 +63,10 @@ export default abstract class GameObject {
             return false;
 
         return true
+    }
+
+    public GetType(): string {
+        return this.Type;
     }
 
     /** Executed each tick. Use this to define behavior. */

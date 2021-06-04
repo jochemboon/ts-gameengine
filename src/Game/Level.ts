@@ -13,7 +13,21 @@ export default class Level {
                 gameObject.SetLevel(this);
                 this.GameObjects.push(gameObject);
             });
-        }            
+        }
+
+        this.OrderDepth();
+    }
+
+    public OrderDepth(): void {
+        this.GameObjects.sort((go1: GameObject, go2: GameObject) => {
+           if (go1.Z > go2.Z)
+               return 1;
+
+           if(go1.Z < go2.Z)
+               return -1;
+
+           return 0;
+        });
     }
 
     public AddGameObject(gameObject: GameObject): void {
