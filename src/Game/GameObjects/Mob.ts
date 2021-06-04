@@ -1,6 +1,6 @@
 import GameObject from "../GameObject";
 import ViewPort from "../ViewPort";
-import {RectType} from "./RectType";
+import {RectType} from "../RectType";
 
 export default class Mob extends GameObject {
     private _maxSpeed: number = 50;
@@ -8,8 +8,9 @@ export default class Mob extends GameObject {
     private _ySpeed: number = 0;
 
     constructor(x: number, y: number) {
-        super(x, y, 0, 32, 32);
+        super(x, y, 1, 32, 32);
         this.setRandomSpeed();
+        this.Type = "Mob";
 
         setTimeout(() => this.setRandomSpeed, 5000);
     }

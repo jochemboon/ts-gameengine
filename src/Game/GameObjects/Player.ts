@@ -1,12 +1,13 @@
 import GameObject from '../GameObject';
 import ViewPort from "../ViewPort";
-import {RectType} from "./RectType";
+import {RectType} from "../RectType";
 
 export default class Player extends GameObject {
     private _speed = 200;
 
     constructor(x: number, y: number) {
         super(x, y, 0, 32, 32);
+        this.Type = "Player";
     }
 
     public OnDraw(deltaTime: number, heldKeys: Array<string>, viewPort: ViewPort): void {
